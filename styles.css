@@ -1,6 +1,9 @@
 body {
   font-family: "Poppins", Arial, sans-serif;
   background-color: #f0f0f0;
+}
+
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,6 +137,11 @@ input#albumLinkInput {
   border: #000;
   border-color: #000;
 }
+h1 {
+  position: absolute;
+  margin-left: 5vw;
+  margin-top: 5vh;
+}
 
 button {
   border: none;
@@ -185,7 +193,6 @@ button {
 }
 
 .track-length {
-  font-family: "Silkscreen", cursive;
   color: #888;
 }
 
