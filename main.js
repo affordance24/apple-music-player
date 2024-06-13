@@ -3,6 +3,8 @@ const SPOTIFY_CLIENT_SECRET = "161fc5e3df004b95af3ba8c62f3eaf54";
 let ALBUM_ID = "0FTvRrMY7LPrTKyfUdeXAr?si=ADzeiAaFQSCqXZpo28v8bA"; // Default album ID
 const container = document.querySelector('div[data-js="tracks"]');
 const albumCoverContainer = document.querySelector('.album-cover');
+const albumLinkInput = document.getElementById('albumLinkInput');
+const loadAlbumButton = document.getElementById('loadAlbumButton');
 
 let currentPlayingTrack; // Variable to store the URL of the currently playing track
 let audioPlayer = new Audio(); // Create an audio element for playing track previews
@@ -117,7 +119,6 @@ function togglePlayIcon(trackItem) {
   if (trackNumber.textContent.trim() === '▶') {
     trackNumber.textContent = trackNumber.dataset.trackNumber;
     trackItem.classList.remove('clicked');
-    albumCoverContainer.classList.remove('rotate');
     
     return false; // Track is paused
   } else {
@@ -134,7 +135,6 @@ function togglePlayIcon(trackItem) {
     trackNumber.dataset.trackNumber = trackNumber.textContent;
     trackNumber.textContent = '▶';
     trackItem.classList.add('clicked');
-    albumCoverContainer.classList.add('rotate');
     return true; // Track is playing
   }
 }
@@ -150,7 +150,6 @@ function playTrack(previewUrl, trackItem) {
   audioPlayer.play().then(() => {
     console.log(`Playing track with preview URL: ${previewUrl}`);
     currentPlayingTrack = previewUrl;
-    albumCoverContainer.classList.add('rotate');
   }).catch(error => {
     console.error('Error playing track', error);
   });
@@ -185,6 +184,23 @@ function fetchAccessToken() {
     });
 }
 
+// Event listener for load album button
+loadAlbumButton.addEventListener('click', () => {
+  const albumLink = albumLinkInput.value;
+  const albumId = extractAlbumId(albumLink);
+  if (albumId) {
+    ALBUM_ID = albumId;
+    fetchAccessToken();
+  } else {
+    console.error('Invalid Spotify album link.');
+  }
+});
+
+// Extract album ID from Spotify link
+function extractAlbumId(link) {
+  const match = link.match(/album\/([a-zA-Z0-9]+)\?/);
+  return match ? match[1] : null;
+}
 
 // Initial fetch for the default album
 fetchAccessToken();
