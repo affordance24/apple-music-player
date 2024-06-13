@@ -1,6 +1,6 @@
 const SPOTIFY_CLIENT_ID = "67b411e20d594f30bf7a8d3bbde54285";
 const SPOTIFY_CLIENT_SECRET = "161fc5e3df004b95af3ba8c62f3eaf54";
-let ALBUM_ID = "0FTvRrMY7LPrTKyfUdeXAr?si=ADzeiAaFQSCqXZpo28v8bA"; // Default album ID
+let ALBUM_ID = "4WF4HvVT7VjGnVjxjoCR6w?si=Os_80OPOQEeGLQNILrZofQ"; // Default album ID
 const container = document.querySelector('div[data-js="tracks"]');
 const albumCoverContainer = document.querySelector('.album-cover');
 const albumLinkInput = document.getElementById('albumLinkInput');
